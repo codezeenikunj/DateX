@@ -1,0 +1,37 @@
+.activeLi {
+  background: linear-gradient(14deg, #f10f75 0%, #ff298b 99.72%);
+  margin: 5px 10px !important;
+  border-radius: 10px;
+  padding: 0px 0px !important;
+  color: white !important;
+}
+.card {
+  box-shadow: none !important;
+}
+
+.activeLi a i {
+  color: white !important;
+}
+
+.activeLi a span {
+  color: white !important;
+}
+
+.sidebar-menu li {
+  margin: 5px 10px !important;
+  border-radius: 5px !important;
+}
+
+.sidebar-menu li a:hover {
+  border-radius: 5px !important;
+  color: white !important;
+  background-color: rgb(36, 36, 36) !important;
+}
+
+.sidebar-menu li a:hover i {
+  color: white !important;
+}
+
+.sidebar-menu li a:hover span {
+  color: white !important;
+}
