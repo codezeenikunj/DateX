@@ -142,6 +142,15 @@ class GeneralController extends BaseController
     public function translate(Request $request){
         return $this->translate_lang($request->detail,$request->lang);
     }
+    public function get_diamond_packs(Request $request){
+         $pack=DiamondPacks::all();
+        return $this->sendResponse($pack,__('Get_Successfully',[],$this->lang)); 
+    }
+    function get_setting_data(Request $req)
+    {
+      $data['appdata'] = DB::table('appdata')->first();
+      return $this->sendResponse($data,__('Get_Successfully',[],$this->lang)); 
+    }
     public function upload_file(Request $request){
        if($request->file('files')){
             $files=[];
