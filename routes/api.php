@@ -52,6 +52,8 @@ Route::post('new_token', [UserController::class,'new_token']);
 Route::post('social_login', [UserController::class,'social_login']);
 Route::post('verify_otp', [UserController::class,'verify_otp']);
 Route::post('upload_file', [GeneralController::class,'upload_file']);
+Route::get('get_diamond_packs', [GeneralController::class, 'get_diamond_packs']);
+Route::get('get_setting_data', [GeneralController::class, 'get_setting_data']);
 Route::middleware('auth:api')->group(function () {
     Route::match(['get','post','delete'],'profile_image/{id?}', [UserController::class,'profile_image']);
     Route::match(['get','post'],'profile', [UserController::class,'profile']);
@@ -73,6 +75,9 @@ Route::middleware('auth:api')->group(function () {
     Route::post('delete_account',[UserController::class,'delete_account']);
     Route::post('block_unblock',[UserController::class,'block_unblock']);
     Route::post('report',[UserController::class,'report']);
+    Route::post('diamond_event', [UserController::class, 'diamond_event']);
+    Route::post('minus_coins_fromwallet', [UserController::class, 'minus_coins_fromwallet']);
+    Route::post('add_coins_towallet', [UserController::class, 'add_coins_towallet']);
 });
 
 Route::get('/user', function (Request $request) {
@@ -81,6 +86,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/unauthenticated', function () {
     return response()->json(['message' => 'Unauthenticated.'], 403);
 });
+
 
 // // Route::post('register', [UsersController::class, 'addUserDetails'])->middleware('checkHeader');
 // Route::post('updateProfile', [UsersController::class, 'updateProfile'])->middleware('checkHeader');

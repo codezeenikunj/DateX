@@ -555,4 +555,54 @@ class UserController extends BaseController
         Report::create(['user_id'=>$request->user_id,'user_by'=>auth()->id(),'reason'=>$request->reason]);
         return $this->sendResponse($request->all(),__('Successfully_Submited',[],$this->lang));
     }
+    public function diamond_event(Request $request){
+        $input=$request->all();
+        $validator = Validator::make($input, [
+            'events' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError($validator->errors()->first(),$input,400);
+        }
+        $user =  auth()->user();
+        $diamond=DB::table('appdata')->where('id', 1)->value($request->events.'_diamond');
+        if($diamond && $user){
+            if($user->wallet>=$diamond){
+                $user->wallet=$user->wallet-$diamond;
+                $user->save();
+            }
+        }
+        return $this->sendResponse($request->all(),'Successfully');
+    }
+    function minus_coins_fromwallet(Request $request)
+    {
+        $input=$request->all();
+        $validator = Validator::make($input, [
+            'amount' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError($validator->errors()->first(),$input,400);
+        }
+        $user = auth()->user();
+        if ($user->wallet < $request->amount) {
+            return $this->sendError('No enough coins in the wallet!');
+        }
+        $user->wallet -= $request->amount;
+        $result = $user->save();
+        return $this->sendResponse($request->all(),'coins deducted from wallet successfully');
+    }
+    function add_coins_towallet(Request $request)
+    {
+        $input=$request->all();
+        $validator = Validator::make($input, [
+            'amount' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError($validator->errors()->first(),$input,400);
+        }
+        $user = auth()->user();
+        $user->wallet  += $request->amount;
+        $user->total_collected += $request->amount;
+        $result = $user->save();
+        return $this->sendResponse($request->all(),'coins added to wallet successfully');
+    }
 }

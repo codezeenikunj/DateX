@@ -63,7 +63,7 @@
                         @csrf     
                             <select name="chang_lang" class="form-control" onchange="document.getElementById('language_change').submit()">
                                 @foreach(\App\Models\Language::get(); as $key=>$value)
-                                <option value="{{$value->id}}" {{$value->is_default==1?'selected':''}}>{{$value->language_name}}</option>
+                                <option value="{{$value->id}}" {{Session::get('lang_option')==$value->short_code?'selected':''}}>{{$value->language_name}}</option>
                                 @endforeach
                             </select>
                         </form>
@@ -125,7 +125,7 @@
 
                         <li class="sideBarli  diamondpackSideA">
                             <a href="{{ route('diamondpacks') }}" class="nav-link"><i
-                                    class="fas fa-box"></i><span>{{ __('plans') }}</span></a>
+                                    class="fas fa-box"></i><span>{{ __('app.Diamond_packs') }}</span></a>
                         </li>
 
                         <li class="sideBarli subscriptionSideA">
@@ -176,10 +176,10 @@
                                     class="fas fa-heart"></i><span>{{ __('know_languages') }}</span></a>
                        </li>
 
-                       {{-- <li class="sideBarli otherSideA">
+                       <li class="sideBarli otherSideA">
                             <a href="{{ route('setting') }}"><i
                                     class="fas fa-cog  pt-1"></i><span>{{ __('setting') }}</span></a>
-                        </li> --}}
+                        </li>
 
                         <li class="menu-header">{{ __('Pages') }}</li>
 

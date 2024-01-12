@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\KnowLanguage;
 use App\Models\TypeOfRelationship;
 use App\Notifications\AccountRecovery;
+use App\Models\DiamondPacks;
 use App\Models\Plan;
 use DB;
 class GeneralController extends BaseController
